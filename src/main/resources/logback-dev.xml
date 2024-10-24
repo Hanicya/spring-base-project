@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <!-- 定义全局变量 -->
+    <!-- 项目名称 -->
+    <property name="PROJECT_NAME" value="base-api" />
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOG_HOME" value="log" />
+
+
+    <!-- 日志附加器 -->
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--过滤-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--                     <level>INFO</level>-->
+<!--                     <onMatch>ACCEPT</onMatch>-->
+<!--                     <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+        <!-- 日志编码 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 日志文件 -->
+    <appender name="SYSTEM_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器，只打印ERROR级别的日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.system-dev.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>1</MaxHistory>
+            <!--日志文件最大的大小-->
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <!-- 日志编码 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 日志分发树形结构逻辑 -->
+    <!-- 根日志记录器是所有日志消息的入口点，它负责将日志消息路由到相应的 Appender（输出目的地）中进行处理和输出 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="SYSTEM_FILE" />
+    </root>
+
+    <!-- 日志记录器 additivity为ture表示传递给父级日志记录器 -->
+    <logger name="system_error" additivity="true">
+        <appender-ref ref="SYSTEM_FILE"/>
+    </logger>
+
+
+
+
+</configuration>
+
