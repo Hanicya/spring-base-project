@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @Author: HuangYiCheng
@@ -12,6 +13,7 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @Slf4j
 @EnableCaching
+@EnableScheduling
 @SpringBootApplication
 @MapperScan(basePackages = "com.cbz.mapper")
 public class CbzApplication {

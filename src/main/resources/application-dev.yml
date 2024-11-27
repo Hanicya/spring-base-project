@@ -57,3 +57,7 @@ application:
     enable: true
   message:
     cpId: http123
+  # 定时任务执行间隔时间大小
+  taskInterval:
+    # 自动好评任务单位h
+    autoPraise: 3000
