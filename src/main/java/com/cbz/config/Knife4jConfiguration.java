@@ -1,6 +1,5 @@
 package com.cbz.config;
 
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
+/**
+ * @author HuangYiCheng
+ * @since 2024/12/4
+ * api文档配置
+ */
 @Configuration
 @EnableSwagger2WebMvc
 public class Knife4jConfiguration {

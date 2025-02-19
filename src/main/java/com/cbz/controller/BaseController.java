@@ -3,9 +3,11 @@ package com.cbz.controller;
 import com.cbz.exception.BizException;
 import com.cbz.model.entity.sys.SysUser;
 import com.cbz.model.resp.Student;
+import com.cbz.model.resp.UserBuyRecordsResp;
 import com.cbz.service.BaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +17,10 @@ import java.util.List;
 
 
 /**
- * @Author: HuangYiCheng
- * @Date: 2024/8/8
+ * @author HuangYiCheng
+ * @since 2024/8/8
  */
+@Slf4j
 @Api(tags = "Base接口")
 @RestController
 @RequestMapping("/test")
@@ -62,6 +65,31 @@ public class BaseController {
     @GetMapping("/cache")
     public Student getCache(){
         return service.getCache();
+    }
+
+    @ApiOperation("动态数据源")
+    @GetMapping("/getDynamicData")
+    public UserBuyRecordsResp getDynamicData(){
+        return service.getDynamicData();
+    }
+
+    @ApiOperation("动态数据源-事务")
+    @GetMapping("/DynamicDataInTrans")
+    public void DynamicDataInTrans(){
+        service.DynamicDataInTrans();
+    }
+
+    @ApiOperation("mybatis-实验")
+    @GetMapping("/mybatisTest")
+    public void mybatisTest(){
+        service.mybatisTest();
+    }
+
+    @ApiOperation("日志")
+    @GetMapping("/log")
+    public void log() {
+        log.info("info日志");
+        log.error("error日志");
     }
 
 

@@ -17,6 +17,7 @@
     <properties>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <mybatis-dynamic.version>3.5.1</mybatis-dynamic.version>
+        <druid.version>1.2.12</druid.version>
     </properties>
 
     <dependencies>
@@ -63,6 +64,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${mybatis-dynamic.version}</version>
+        </dependency>
+        <!-- 德鲁伊连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
         </dependency>
         <!--websocket-->
         <dependency>

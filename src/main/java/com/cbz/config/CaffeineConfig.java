@@ -9,9 +9,14 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author HuangYiCheng
+ * @since 2024/12/4
+ * 本地缓存配置
+ */
 @Configuration
 public class CaffeineConfig {
-    // 本地缓存配置
+
     @Bean("caffeineCacheManager")
     public CacheManager cacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();

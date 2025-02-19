@@ -1,39 +1,87 @@
 # 服务配置
 server:
-  port: 8085
+  port: 8085 # 端口
+
 # spring配置
 spring:
-  # 数据源配置
+  # 1、数据源配置
   datasource:
-    # 动态数据源
+    # 1.1 动态数据源
     dynamic:
-      primary: demo
-      strict: true
+      primary: demo # 默认数据源
+      strict: true # 严格模式
+      # 数据源
       datasource:
+        # demo数据源
         demo:
           url: jdbc:mysql://localhost:3306/demo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
           username: root
           password: 123456
-    # 数据库连接池
-
-  # servlet配置
+        # dk数据源
+        dk:
+          url: jdbc:mysql://119.23.74.163:3306/test?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&autoReconnectForPools=true&connectTimeout=30000&socketTimeout=60000
+          username: root
+          password: hcxtec888
+      # 公共连接池参数配置
+      druid:
+        initial-size: 10 # 初始化连接数
+        max-active: 100 # 最大活跃连接数
+        min-idle: 10 # 最小空闲连接数
+        max-wait: 60000 # 连接最大等待时间
+        pool-prepared-statements: true # 启用缓存
+        max-pool-prepared-statement-per-connection-size: 20 # 最大缓存
+        time-between-eviction-runs-millis: 60000 # 空闲连接检测的时间间隔
+        min-evictable-idle-time-millis: 300000 # 空闲连接最小可被回收时间
+        test-while-idle: true # 是否在空闲连接检测时执行
+        test-on-borrow: false # 是否在空闲连接检测时执行
+        test-on-return: false # 是否在归还连接时验证连接的有效性
+    # 1.2 数据源监控配置
+    druid:
+      # servlet 程序配置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: druid
+        login-password: 123456
+      # 监控和统计过滤配置
+      web-stat-filter:
+        enabled: true # 开启web url监控
+        session-stat-enable: true  # session监控
+        session-stat-max-count: 1000 # session的最大个数，默认100
+        url-pattern: /* # 过滤所有url
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 排除一些不必要的url
+      # 过滤配置
+      filter:
+        stat:
+          enabled: true #  开启数据源状态监控
+          log-slow-sql: true  # 开启慢sql监控 记录到日志中
+          slow-sql-millis: 2000 # 超过2s就算慢sql
+          merge-sql: true
+          db-type: mysql
+        wall:
+          config:
+            multi-statement-allow: true
+          db-type: mysql
+  # 2、服务配置
   servlet:
     multipart:
       # 文件最大请求
       max-file-size: 1000MB
       # 数据最大请求
       max-request-size: 1000MB
+
 # mybatis-plus配置
 mybatis-plus:
   configuration:
-    # 日志
-#    log-impl: com.dhp.common.core.mybatis.MyBaitsLogConfig
-    map-underscore-to-camel-case: true
+    log-impl: com.cbz.config.MyBaitsLogConfig  # 自定义日志实现
+    map-underscore-to-camel-case: true #下划线转驼峰
     auto-mapping-unknown-column-behavior: WARNING
     call-setters-on-nulls: false
-    cache-enabled: false
+    cache-enabled: false # 关闭缓存
+  # mapper-xml文件路径
   mapper-locations:
     - classpath*:/mapper/**/*.xml
+  # 全局配置
   global-config:
     banner: false
     db-config:
@@ -41,6 +89,7 @@ mybatis-plus:
       logic-not-delete-value: 0
 
   typeEnumsPackage: com.cbz.model.enums
+
 # api文档配置
 knife4j:
   enable: true
@@ -49,15 +98,15 @@ knife4j:
 logging:
   config: classpath:logback-dev.xml
 
-
 # 自定义应用属性
 application:
   # swagger 开关
   swagger:
     enable: true
-  message:
-    cpId: http123
   # 定时任务执行间隔时间大小
   taskInterval:
-    # 自动好评任务单位h
-    autoPraise: 3000
+    # 自动好评任务
+    autoPraise: 1000000
+  # jwt前缀
+  jwt:
+    tokenPrefix: 'Bearer '

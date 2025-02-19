@@ -25,7 +25,7 @@
     </appender>
     <!-- 日志文件 -->
     <appender name="SYSTEM_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 过滤器，只打印ERROR级别的日志 -->
+        <!-- 记录策略，只打印ERROR级别的日志 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
             <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.system-dev.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
@@ -40,18 +40,19 @@
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %logger{50} - %msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
+        <!-- 过滤器-只记录错误的日志 -->
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>ERROR</level>-->
+<!--        </filter>-->
     </appender>
     <!-- 日志分发树形结构逻辑 -->
-    <!-- 根日志记录器是所有日志消息的入口点，它负责将日志消息路由到相应的 Appender（输出目的地）中进行处理和输出 -->
+    <!-- 根日志记录器是所有日志消息的入口点，它负责将日志消息路由到相应的 Appender（输出目的地）中进行处理和输出
+     level表示 INFO 级别及其更高的级别（如 WARN、ERROR）的日志事件会被处理-->
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="SYSTEM_FILE" />
     </root>
 
-    <!-- 日志记录器 additivity为ture表示传递给父级日志记录器 -->
-    <logger name="system_error" additivity="true">
-        <appender-ref ref="SYSTEM_FILE"/>
-    </logger>
 
 
 

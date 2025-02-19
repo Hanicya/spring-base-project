@@ -1,6 +1,5 @@
 package com.cbz.task;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +8,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class BaseTask {
-
-//    @Value("${application.taskInterval.autoPraise}")
-//    private long fixedRate;  // 从配置文件中获取
 
 
     /**

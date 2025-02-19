@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  **/
 @Slf4j
 @Service
-@ServerEndpoint(value = "/ws/webSocket")
+@ServerEndpoint(value = "/webSocket")
 public class WebSocketServer {
     //当前在线连接数
     private static int onlineCount = 0;

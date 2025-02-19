@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Author: HuangYiCheng
- * @Date: 2024/8/8
+ * @author HuangYiCheng
+ * @since 2024/8/8
+ * 拦截器
  */
 @Slf4j
 public class RequestInterceptor implements HandlerInterceptor {
